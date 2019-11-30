@@ -3,13 +3,10 @@ package cn.binarywang.wx.miniapp.api.impl;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import cn.binarywang.wx.miniapp.bean.*;
 import org.testng.annotations.*;
 
 import cn.binarywang.wx.miniapp.api.WxMaService;
-import cn.binarywang.wx.miniapp.bean.WxMaKefuMessage;
-import cn.binarywang.wx.miniapp.bean.WxMaTemplateData;
-import cn.binarywang.wx.miniapp.bean.WxMaTemplateMessage;
-import cn.binarywang.wx.miniapp.bean.WxMaUniformMessage;
 import cn.binarywang.wx.miniapp.test.ApiTestModule;
 import cn.binarywang.wx.miniapp.test.TestConfig;
 import com.google.common.collect.Lists;
@@ -48,16 +45,31 @@ public class WxMaMsgServiceImplTest {
       .formId("FORMID")
       .page("index")
       .data(Lists.newArrayList(
-        new WxMaTemplateData("keyword1", "339208499", "#173177"),
-        new WxMaTemplateData("keyword2", dateFormat.format(new Date()), "#173177"),
-        new WxMaTemplateData("keyword3", "粤海喜来登酒店", "#173177"),
-        new WxMaTemplateData("keyword4", "广州市天河区天河路208号", "#173177")))
+        new WxMaTemplateData("keyword1", "339208499"),
+        new WxMaTemplateData("keyword2", dateFormat.format(new Date())),
+        new WxMaTemplateData("keyword3", "粤海喜来登酒店"),
+        new WxMaTemplateData("keyword4", "广州市天河区天河路208号")))
       .templateId(config.getTemplateId())
       .emphasisKeyword("keyword1.DATA")
       .build();
     //templateMessage.addData( new WxMaTemplateData("keyword1", "339208499", "#173177"));
     this.wxService.getMsgService().sendTemplateMsg(templateMessage);
   }
+
+
+  @Test
+  public void testSendSubscribeMsg() throws WxErrorException {
+    TestConfig config = (TestConfig) this.wxService.getWxMaConfig();
+
+    WxMaSubscribeMessage message = new WxMaSubscribeMessage();
+    message.setTemplateId(config.getTemplateId());
+    message.setToUser(config.getOpenid());
+    message.addData(new WxMaSubscribeData("thing1", "苹果到货啦"));
+    message.addData(new WxMaSubscribeData("amount3", "¥5"));
+    message.addData(new WxMaSubscribeData("thing5", "记得领取哦"));
+    this.wxService.getMsgService().sendSubscribeMsg(message);
+  }
+
 
   @Test
   public void testSendUniformMsg() throws WxErrorException {

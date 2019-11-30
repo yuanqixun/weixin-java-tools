@@ -24,6 +24,11 @@ import lombok.*;
 @AllArgsConstructor
 @XStreamAlias("xml")
 public class WxPayRedpackQueryRequest extends BaseWxPayRequest {
+
+  @Override
+  protected String[] getIgnoredParamsForSign() {
+    return new String[]{"sub_appid","sub_mch_id","sign_type"};
+  }
   /**
    * 商户订单号
    * mch_billno

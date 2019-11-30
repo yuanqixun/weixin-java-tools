@@ -2,7 +2,7 @@ package me.chanjar.weixin.open.api;
 
 import cn.binarywang.wx.miniapp.config.WxMaConfig;
 import me.chanjar.weixin.common.util.http.apache.ApacheHttpClientBuilder;
-import me.chanjar.weixin.mp.api.WxMpConfigStorage;
+import me.chanjar.weixin.mp.config.WxMpConfigStorage;
 import me.chanjar.weixin.open.bean.WxOpenAuthorizerAccessToken;
 import me.chanjar.weixin.open.bean.WxOpenComponentAccessToken;
 
@@ -37,7 +37,7 @@ public interface WxOpenConfigStorage {
 
   void expireComponentAccessToken();
 
-  void updateComponentAccessTokent(WxOpenComponentAccessToken componentAccessToken);
+  void updateComponentAccessToken(WxOpenComponentAccessToken componentAccessToken);
 
   String getHttpProxyHost();
 
@@ -59,7 +59,7 @@ public interface WxOpenConfigStorage {
    * @param componentAccessToken 新的accessToken值
    * @param expiresInSeconds     过期时间，以秒为单位
    */
-  void updateComponentAccessTokent(String componentAccessToken, int expiresInSeconds);
+  void updateComponentAccessToken(String componentAccessToken, int expiresInSeconds);
 
   /**
    * 是否自动刷新token

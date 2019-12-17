@@ -120,6 +120,7 @@ public abstract class BaseWxCpTpServiceImpl<H, P> implements WxCpTpService, Requ
     jsonObject = new JsonParser().parse(result).getAsJsonObject();
     WxCpTpCorp wxCpTpCorp = WxCpTpCorp.fromJson(jsonObject.get("auth_corp_info").getAsJsonObject().toString());
     wxCpTpCorp.setPermanentCode(jsonObject.get("permanent_code").getAsString());
+    wxCpTpCorp.setAuthInfo(jsonObject.getAsJsonObject("auth_info").getAsString());
     return wxCpTpCorp;
   }
 
